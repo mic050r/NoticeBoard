@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class ArticleCotroller {
     @Autowired // 스프링 부트가 미리 생성해 높은 리파지터리 객체 주입(DI) -> 의존성 주입
     private ArticleRepository articleRepository;
+
     @GetMapping("/articles/new") // URL 요청 접수
     public String newArticleForm() {
         return "articles/new";
