@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j // 로깅 기능을 위한 어노테이션 추가 -> Simple Logging Facade for Java의 약자
@@ -26,12 +27,16 @@ public class ArticleCotroller {
         // 1. DTO를 엔티티로 변환
         Article article = form.toEntity();
         log.info(form.toString()); // 로깅 코드 추가
-//        System.out.println(article.toString());
         // 2. 리파지터리로 엔티티를 DB에 저장
         Article saved = articleRepository.save(article); // article 엔티티를 저장해 saved 객체에 반환
         log.info(saved.toString()); // 로깅 코드 추가
-//        System.out.println(saved.toString());
 
+        return "";
+    }
+
+    @GetMapping("/articles/{id}") // 데이터 조회 요청 접수
+    public String show(@PathVariable Long id){ // 매개변수로 id 받아오기
+        log.info("id = " + id);
         return "";
     }
 }
