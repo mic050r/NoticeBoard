@@ -19,4 +19,5 @@ public class Article {
     private String title;
     @Column // content 필드 선언, DB 테이블의 content 열과 연결됨
     private String content;
+
 }
