@@ -35,7 +35,7 @@ public class ArticleCotroller {
         Article saved = articleRepository.save(article); // article 엔티티를 저장해 saved 객체에 반환
         log.info(saved.toString()); // 로깅 코드 추가
 
-        return "";
+        return "redirect:/articles/" + saved.getId();
     }
 
     @GetMapping("/articles/{id}") // 데이터 조회 요청 접수
