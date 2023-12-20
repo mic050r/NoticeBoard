@@ -6,9 +6,12 @@ import com.example.noticeboard.repository.ArticleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.Optional;
 
 @Slf4j // 로깅 기능을 위한 어노테이션 추가 -> Simple Logging Facade for Java의 약자
 @Controller // 컨트롤러 선언
@@ -35,8 +38,16 @@ public class ArticleCotroller {
     }
 
     @GetMapping("/articles/{id}") // 데이터 조회 요청 접수
-    public String show(@PathVariable Long id){ // 매개변수로 id 받아오기
-        log.info("id = " + id);
-        return "";
+    public String show(@PathVariable Long id, Model model) { // 매개변수로 id 받아오기
+        log.info("id = " + id); // id를 잘 받았는지 확인하는 로그 찍기
+
+        // 1. id를 조회하여 데이터 가져오기
+        Article articleEntity = articleRepository.findById(id).orElse(null);
+
+        // 2. 모델에 데이터 등록하기
+        model.addAttribute("article", articleEntity);
+
+        // 3. 뷰 페이지 반환하기
+        return "articles/show";
     }
 }
