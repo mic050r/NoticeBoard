@@ -73,4 +73,10 @@ public class ArticleCotroller {
         // 뷰 페이지 설정하기
         return "articles/edit";
     }
+
+    @PostMapping("/articles/update")
+    public String update(ArticleForm form){ // 매개변수로 DTO 받아오기
+        log.info(form.toString());
+        return "";
+    }
 }
