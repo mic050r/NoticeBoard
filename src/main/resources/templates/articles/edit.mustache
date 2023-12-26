@@ -1,0 +1,21 @@
+{{>layouts/header}}
+{{#article}}
+<!--    form 태그는 GET과 POST만 지원 -->
+<form class="container" action="/articles/update" method="post">
+    <input name="id" type="hidden" value="{{id}}">
+    <div class="mb-3">
+        <label class="form-label">제목</label>
+        <input name="title" type="text" class="form-control" value="{{article.title}}">
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">내용</label>
+        <textarea name="content" class="form-control" rows="3" >{{article.content}}</textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+<!--    링크 수정-->
+    <a href="/articles/{{article.id}}">Back</a>
+</form>
+{{/article}}
+{{>layouts/footer}}
