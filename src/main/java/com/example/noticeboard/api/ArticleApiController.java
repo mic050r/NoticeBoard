@@ -3,6 +3,7 @@ package com.example.noticeboard.api;
 import com.example.noticeboard.dto.ArticleForm;
 import com.example.noticeboard.entity.Article;
 import com.example.noticeboard.repository.ArticleRepository;
+import com.example.noticeboard.service.ArticleService;
 import com.sun.net.httpserver.HttpsServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +17,12 @@ import java.util.List;
 @RestController // REST API 용 컨트롤러 선언
 public class ArticleApiController {
     @Autowired // 게시글 리파지터리 주입
-    private ArticleRepository articleRepository;
+    private ArticleService articleService;
 
     // GET
     @GetMapping("/api/articles")
     public List<Article> index(){
-        return articleRepository.findAll();
+        return articleService.index();
     }
 
     // GET
