@@ -1,5 +1,6 @@
 package com.example.noticeboard.service;
 
+import com.example.noticeboard.dto.ArticleForm;
 import com.example.noticeboard.entity.Article;
 import com.example.noticeboard.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,5 +20,11 @@ public class ArticleService {
 
     public Article show(Long id) {
         return articleRepository.findById(id).orElse(null);
+    }
+
+    public Article create(ArticleForm dto) {
+        Article article = dto.toEntity(); // dto를 엔티티로 변환후 article에 저장
+        if(article.getId() != null) return null;
+        return articleRepository.save(article);
     }
 }
