@@ -53,7 +53,8 @@ public class ArticleApiController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }
         // 4. 업데이트 및 정상 응답(200) 하기
-        Article updated = articleRepository.save(article);
+        target.patch(article);
+        Article updated = articleRepository.save(target);
         return ResponseEntity.status(HttpStatus.OK).body(updated);
     }
 
