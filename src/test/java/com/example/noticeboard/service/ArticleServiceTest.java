@@ -1,5 +1,6 @@
 package com.example.noticeboard.service;
 
+import com.example.noticeboard.dto.ArticleForm;
 import com.example.noticeboard.entity.Article;
 import org.junit.jupiter.api.Test; // TEST 패키지 임포트
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,33 @@ class ArticleServiceTest {
         Article article = articleService.show(id);
         // 3. 비교 및 검증
         assertEquals(expected, article);
+    }
+
+    @Test
+    void create_성공_title과_content만_있는_dto_입력() {
+        // 1. 예상 데이터
+        String title = "라라라라";
+        String content = "4444";
+        ArticleForm dto = new ArticleForm(null, title, content);
+        Article expected = new Article(4L, title, content);
+        // 2. 실제 데이터
+        Article article = articleService.create(dto);
+        // 3. 비교 및 검증
+        assertEquals(expected.toString(), article.toString());
+    }
+
+    @Test
+    void create_실패_id가_포함된_dto_입력() {
+        // 1. 예상 데이터
+        Long id = 4L;
+        String title = "라라라라";
+        String content = "4444";
+        ArticleForm dto = new ArticleForm(id, title, content);
+        Article expected = null;
+        // 2. 실제 데이터
+        Article article = articleService.create(dto);
+        // 3. 비교 및 검증
+        assertEquals(expected, article);
+
     }
 }
